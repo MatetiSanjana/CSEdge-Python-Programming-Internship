@@ -34,11 +34,11 @@ for div in pros_divs:
 
 # Combine the phone names, pros, and cons into a structured format
 phones_data = []
-for phone_name, pros, cons in zip(phone_names, all_pros, all_cons):
+for i in range(len(phone_names)):
     phone_data = {
-        "phone": phone_name,
-        "pros": pros,
-        "cons": cons
+        "phone": phone_names[i],
+        "pros": all_pros[i] if i < len(all_pros) else [],
+        "cons": all_cons[i] if i < len(all_cons) else []
     }
     phones_data.append(phone_data)
 
@@ -54,13 +54,13 @@ for phone in phones_data:
     print('-------------------')
 
 # Save the structured data to JSON
-with open('phones_data.json', 'w',encoding='utf-8') as jsonfile:
+with open('phones_data.json', 'w', encoding='utf-8') as jsonfile:
     json.dump(phones_data, jsonfile, indent=4)
 
 print("Extracted data saved to phones_data.json")
 
 # Save the structured data to CSV
-with open('phones_data.csv', 'w',newline='') as csvfile:
+with open('phones_data.csv', 'w', newline='', encoding='utf-8') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(["Phone", "Pros", "Cons"])
     for phone in phones_data:
